@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -20,8 +19,15 @@ function App() {
 
   const onAddToCartClick = (id) =>{
     const selectedItem = allBrands.find(item => item.id === id)
-    setSelectedBrand([...selectedItem])
+    setSelectedBrand([...selectedBrand, selectedItem ])
   }
+
+  const onRemoveClick = (id) => {
+    const FilteredItems = selectedBrand.filter(item => item.id !== id)
+    setSelectedBrand(FilteredItems)
+  }
+
+
 
     return (
       <>
@@ -37,7 +43,7 @@ function App() {
           <div>
             <p> YOUR CART</p>
             {
-              selectedBrand.map(brand => <span>{brand.name}</span>)
+              selectedBrand.map(brand => <p>{brand.name} - <button onClick={()=>onRemoveClick(brand.id)}>Remove</button></p>)
             }
           </div>
         </div>
